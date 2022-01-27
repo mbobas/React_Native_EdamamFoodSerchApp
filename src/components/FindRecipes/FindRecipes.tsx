@@ -7,14 +7,14 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { useEffect } from 'react';
-import { Image, ScrollView, View, NativeModules, Button as RNBUtton, } from 'react-native';
+import { Image, ScrollView, View, NativeModules, Button as RNBUtton } from 'react-native';
 import getRecipe from '../../axios/getRecipe';
-import { Card, Button } from 'react-native-paper';
-import { ButtonItemStyled, ChooseFilterView, FiltersView, HeadeStyled, RecipeImageStyled, ScrollViewCheckBoxStyled, SearchbarStyled, SeparatorItemStyled, TextCheckboxStyled, TextFilterItemStyled, ViewButtonStyled, ViewStyledButton } from './FindRecipesStyled';
+import { ButtonItemStyled, FiltersView, HeadeStyled,  ScrollViewCheckBoxStyled, SearchbarStyled, SeparatorItemStyled, TextCheckboxStyled, TextFilterItemStyled, ViewButtonStyled, ViewStyledButton } from './FindRecipesStyled';
 import RecipesList from './RecipesList';
 import { Checkbox } from 'react-native-paper';
-import NewModuleButton from '../NativeModule/NewModuleButton';
+
 const { CalendarModule } = NativeModules;
+
 
 const FindRecipes: React.FC = ({navigation}:any) => {
   const [searchQuery, setSearchQuery] = React.useState('chicken');
@@ -67,10 +67,8 @@ const onSuggestMeal = async () => {
       <View>
         <HeadeStyled>Food Recipes</HeadeStyled> 
         <Image
-            style={{marginTop: -40, height: 200, zIndex: -1}}
-            source={{
-            uri: 'https://www.edamam.com/web-img/f0a/f0adbe38374c13e19e70c4e755316054.jpg'
-          }}> 
+            style={{marginTop: -40, height: 210, width:600, zIndex: -1}}
+            source={ require('../../assets/header.jpg')}> 
         </Image>
      </View>
       <SearchbarStyled
@@ -97,7 +95,7 @@ const onSuggestMeal = async () => {
         <ViewButtonStyled >
           <RNBUtton
           title="SUGGEST MEAL"
-          color="#b66917"
+          color="#e68b2a"
           onPress={onSuggestMeal}
         />
        </ViewButtonStyled>

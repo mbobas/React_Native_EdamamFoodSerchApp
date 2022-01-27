@@ -13,6 +13,7 @@ export const HeadeStyled = styled(Text)`
 
 export const SearchbarStyled = styled(Searchbar)`
     margin: 10px;
+    margin-top: -20px;
 `;
 
 export const FiltersView = styled(View)`

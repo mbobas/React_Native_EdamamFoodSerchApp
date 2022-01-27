@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
+import React from 'react';
+import { FlatList, Image, SafeAreaView, View } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
 
@@ -10,7 +10,6 @@ const RecipesList = ({navigation, recipesArray}: any) => {
   const renderItem = ({ item }:any) => (
     <View>
       <Item title={item.recipe.label} imageUrl={item.recipe.image} uri={item.recipe.uri} />
-      
     </View>
   );
 
@@ -36,17 +35,16 @@ const RecipesList = ({navigation, recipesArray}: any) => {
     </View>
   );
 
-
-  return (
-    <SafeAreaView>
-      <FlatList
-        scrollEnabled={false}
-        data={recipesArray}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => 'key'+index}
-      />
-    </SafeAreaView>
-  );
-};
+    return (
+      <SafeAreaView>
+        <FlatList
+          scrollEnabled={false}
+          data={recipesArray}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => 'key'+index}
+        />
+      </SafeAreaView>
+    );
+  };
 
   export default RecipesList;
