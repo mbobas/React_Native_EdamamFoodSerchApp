@@ -28,7 +28,8 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
     @ReactMethod(isBlockingSynchronousMethod = true)
     public String suggestMeal() {
-        String[] array = { "Coffe", "Tea", "Beef", "Tomato", "Salad", "Soup", "Salami", " Chicken" };
+        String[] array = { "Coffe", "Tea", "Beef", "Tomato", "Salad", "Soup", "Salami", " Chicken", "Breed", "Chees",
+                "Kimchi", "Orange" };
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
