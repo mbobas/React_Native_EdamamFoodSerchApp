@@ -25,42 +25,46 @@ const FindRecipes: React.FC = ({navigation}:any) => {
   const [isMealType, SetISMealType] = React.useState(false);
   const [mealTypeArray, setMealTypeArray] = React.useState(['Brakfast', 'Dinner', 'Lunch', 'Snack', 'Teatime' ]);
   const [dietArray, setDietArray] = React.useState(['balanced', 'high-fiver', 'high-protein', 'low-carb', 'low-fat', 'low-sodium']); 
-
-const params = {
-  type: 'public',
-  q: searchQuery,
-  app_id: '82ecfb10',
-  app_key: '8c684688ec00f5d49d957a20703ebab0',
-  diet: dietType,
-  mealType: mealType
-};
+  const [paramsAxios, setParamsAxios] = React.useState({
+    type: 'public',
+    q: 'chicken',
+    app_id: '82ecfb10',
+    app_key: '8c684688ec00f5d49d957a20703ebab0',
+    diet: 'balanced',
+    mealType: 'Breakfast'
+  });
 
 const onChangeSearch = (query: string) => {
-  setSearchQuery(query);
-  if(query.length > 3) {
-    getRecipe(params, setRecipesArray);
+  if (query.length > 3) {
+    setParamsAxios({...paramsAxios, q: query})
   }
+  setSearchQuery(query);
 };
 
 const onMealFilter = (item: any) => {
   setMealType(item)
-  getRecipe(params, setRecipesArray)
+  setParamsAxios({...paramsAxios, mealType: item})
 }
 
 const onDietFilter = (item: any) => {
   setDietType(item)
-  getRecipe(params, setRecipesArray)
+  setParamsAxios({...paramsAxios, diet: item})
 }
 
-const onSuggestMeal = async () => {
-  const query: string = await CalendarModule.suggestMeal();
-  console.log(query);
-  onChangeSearch(query)
+const onSuggestMeal = () => {
+  const query: string = CalendarModule.suggestMeal();
+  setSearchQuery(query);
+  if (query.length > 3) {
+    setParamsAxios({...paramsAxios, q: query})
+  }
 };
 
   useEffect(() => {
-      getRecipe(params, setRecipesArray);
-  },[]);
+    const getAsync = async () => {
+      getRecipe(paramsAxios, setRecipesArray);
+    }
+    getAsync();
+  },[paramsAxios]);
 
   return (
     <View style={{backgroundColor: "white"}}>
@@ -77,6 +81,22 @@ const onSuggestMeal = async () => {
         value={searchQuery}
       />
       <FiltersView>
+        <ViewButtonStyled >
+            <RNBUtton
+            title="SEARCH MEAL"
+            color="#e68b2a"
+            onPress={() => getRecipe(paramsAxios, setRecipesArray)}
+          />
+        </ViewButtonStyled>
+        <ViewButtonStyled >
+            <RNBUtton
+            title="SUGGEST MEAL"
+            color="#98a32d"
+            onPress={onSuggestMeal}
+          />
+        </ViewButtonStyled>
+      </FiltersView>
+      <FiltersView>
         <Checkbox
           status={isDiet ? 'checked' : 'unchecked'}
           color="tomato"
@@ -92,13 +112,6 @@ const onSuggestMeal = async () => {
           }}
         />
         <TextCheckboxStyled>Meal Type Filter</TextCheckboxStyled>
-        <ViewButtonStyled >
-          <RNBUtton
-          title="SUGGEST MEAL"
-          color="#e68b2a"
-          onPress={onSuggestMeal}
-        />
-       </ViewButtonStyled>
       </FiltersView>
       <View>
         <ScrollViewCheckBoxStyled nestedScrollEnabled={true} horizontal={true}>
