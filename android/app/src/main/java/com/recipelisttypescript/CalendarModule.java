@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.Map;
 import java.util.HashMap;
 import android.util.Log;
+import java.util.Random;
 
 public class CalendarModule extends ReactContextBaseJavaModule {
     CalendarModule(ReactApplicationContext context) {
@@ -26,7 +27,10 @@ public class CalendarModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    public String getLuckyString() {
-        return "Orange";
+    public String suggestMeal() {
+        String[] array = { "Coffe", "Tea", "Beef", "Tomato", "Salad", "Soup", "Salami", " Chicken" };
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
     }
+
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react-native/no-inline-styles */
@@ -6,16 +7,16 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { useEffect } from 'react';
-import { FlatList, Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, View, NativeModules, Button as RNBUtton, } from 'react-native';
 import getRecipe from '../../axios/getRecipe';
 import { Card, Button } from 'react-native-paper';
-import { ButtonItemStyled, FiltersView, HeaderBackgroundStyled, HeadeStyled, RecipeImageStyled, ScrollViewCheckBoxStyled, SearchbarStyled, SeparatorItemStyled, TextCheckboxStyled, TextFilterItemStyled } from './FindRecipesStyled';
+import { ButtonItemStyled, ChooseFilterView, FiltersView, HeadeStyled, RecipeImageStyled, ScrollViewCheckBoxStyled, SearchbarStyled, SeparatorItemStyled, TextCheckboxStyled, TextFilterItemStyled, ViewButtonStyled, ViewStyledButton } from './FindRecipesStyled';
 import RecipesList from './RecipesList';
-import Filter from './Filter1';
 import { Checkbox } from 'react-native-paper';
-import NewModuleButton from '../NativeCalendarModule/NewModuleButton';
+import NewModuleButton from '../NativeModule/NewModuleButton';
+const { CalendarModule } = NativeModules;
 
-const FindRecipes: React.FC = ({navigation}) => {
+const FindRecipes: React.FC = ({navigation}:any) => {
   const [searchQuery, setSearchQuery] = React.useState('chicken');
   const [recipesArray, setRecipesArray] = React.useState([{"recipe": { "label": "a"}}]);
   const [dietType, setDietType] = React.useState('balanced');
@@ -24,7 +25,6 @@ const FindRecipes: React.FC = ({navigation}) => {
   const [isMealType, SetISMealType] = React.useState(false);
   const [mealTypeArray, setMealTypeArray] = React.useState(['Brakfast', 'Dinner', 'Lunch', 'Snack', 'Teatime' ]);
   const [dietArray, setDietArray] = React.useState(['balanced', 'high-fiver', 'high-protein', 'low-carb', 'low-fat', 'low-sodium']); 
-  const [message, setMessage] = React.useState('');
 
 const params = {
   type: 'public',
@@ -52,6 +52,12 @@ const onDietFilter = (item: any) => {
   getRecipe(params, setRecipesArray)
 }
 
+const onSuggestMeal = async () => {
+  const query: string = await CalendarModule.suggestMeal();
+  console.log(query);
+  onChangeSearch(query)
+};
+
   useEffect(() => {
       getRecipe(params, setRecipesArray);
   },[]);
@@ -64,8 +70,7 @@ const onDietFilter = (item: any) => {
             style={{marginTop: -40, height: 200, zIndex: -1}}
             source={{
             uri: 'https://www.edamam.com/web-img/f0a/f0adbe38374c13e19e70c4e755316054.jpg'
-          }}
-        > 
+          }}> 
         </Image>
      </View>
       <SearchbarStyled
@@ -89,8 +94,13 @@ const onDietFilter = (item: any) => {
           }}
         />
         <TextCheckboxStyled>Meal Type Filter</TextCheckboxStyled>
-        <NewModuleButton setMessage={setMessage}/>
-        {message ? <Text>{message}</Text> : <Text>message</Text>}
+        <ViewButtonStyled >
+          <RNBUtton
+          title="SUGGEST MEAL"
+          color="#b66917"
+          onPress={onSuggestMeal}
+        />
+       </ViewButtonStyled>
       </FiltersView>
       <View>
         <ScrollViewCheckBoxStyled nestedScrollEnabled={true} horizontal={true}>

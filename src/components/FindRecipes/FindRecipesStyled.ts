@@ -19,6 +19,7 @@ export const FiltersView = styled(View)`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 5px;
 `;
 
 export const TextCheckboxStyled = styled(Text)`
@@ -29,6 +30,10 @@ export const TextCheckboxStyled = styled(Text)`
 export const RecipeImageStyled = styled(Image)`
     height: 50px;
     width: 66px,
+`;
+
+export const ChooseFilterView = styled(View)`
+    margin-bottom: 5px;
 `;
 
 export const ScrollViewCheckBoxStyled = styled(ScrollView)`
@@ -46,6 +51,10 @@ export const SeparatorItemStyled = styled(View)`
     width: 10px;
     height: 10px;
     color: red;
+`;
+
+export const ViewButtonStyled = styled(View)`
+    margin-left: 10px;
 `;
 
 
