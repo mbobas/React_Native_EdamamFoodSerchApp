@@ -11,8 +11,9 @@ import getRecipe from '../../axios/getRecipe';
 import { Card, Button } from 'react-native-paper';
 import { ButtonItemStyled, FiltersView, HeaderBackgroundStyled, HeadeStyled, RecipeImageStyled, ScrollViewCheckBoxStyled, SearchbarStyled, SeparatorItemStyled, TextCheckboxStyled, TextFilterItemStyled } from './FindRecipesStyled';
 import RecipesList from './RecipesList';
-import Filter from './Filter';
+import Filter from './Filter1';
 import { Checkbox } from 'react-native-paper';
+import NewModuleButton from '../NativeCalendarModule/NewModuleButton';
 
 const FindRecipes: React.FC = ({navigation}) => {
   const [searchQuery, setSearchQuery] = React.useState('chicken');
@@ -23,7 +24,8 @@ const FindRecipes: React.FC = ({navigation}) => {
   const [isMealType, SetISMealType] = React.useState(false);
   const [mealTypeArray, setMealTypeArray] = React.useState(['Brakfast', 'Dinner', 'Lunch', 'Snack', 'Teatime' ]);
   const [dietArray, setDietArray] = React.useState(['balanced', 'high-fiver', 'high-protein', 'low-carb', 'low-fat', 'low-sodium']); 
-  
+  const [message, setMessage] = React.useState('');
+
 const params = {
   type: 'public',
   q: searchQuery,
@@ -64,7 +66,6 @@ const onDietFilter = (item: any) => {
             uri: 'https://www.edamam.com/web-img/f0a/f0adbe38374c13e19e70c4e755316054.jpg'
           }}
         > 
-          
         </Image>
      </View>
       <SearchbarStyled
@@ -88,6 +89,8 @@ const onDietFilter = (item: any) => {
           }}
         />
         <TextCheckboxStyled>Meal Type Filter</TextCheckboxStyled>
+        <NewModuleButton setMessage={setMessage}/>
+        {message ? <Text>{message}</Text> : <Text>message</Text>}
       </FiltersView>
       <View>
         <ScrollViewCheckBoxStyled nestedScrollEnabled={true} horizontal={true}>

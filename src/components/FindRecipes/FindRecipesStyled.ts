@@ -24,7 +24,6 @@ export const FiltersView = styled(View)`
 export const TextCheckboxStyled = styled(Text)`
     display: flex;
     align-self: center;
-    color: 'tomato'
 `;
 
 export const RecipeImageStyled = styled(Image)`
