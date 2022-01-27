@@ -90,7 +90,7 @@ const onDietFilter = (item: any) => {
         <TextCheckboxStyled>Meal Type Filter</TextCheckboxStyled>
       </FiltersView>
       <View>
-        <ScrollViewCheckBoxStyled horizontal={true}>
+        <ScrollViewCheckBoxStyled nestedScrollEnabled={true} horizontal={true}>
             {isMealType ? mealTypeArray.map((item) => {
               return (
                 <View style={{flex: 1, flexDirection: "row"}}>

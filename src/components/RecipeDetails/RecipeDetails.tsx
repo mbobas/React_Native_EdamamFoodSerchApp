@@ -40,7 +40,7 @@ const RecipeDetails: React.FC = ({route, navigation }) => {
           }}
         />
       
-     <ScrollView>
+     <ScrollView nestedScrollEnabled={true}>
      <DataTable>
       <DataTable.Header>
         <DataTable.Title>Meal Type</DataTable.Title>
