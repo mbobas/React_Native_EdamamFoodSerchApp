@@ -15,7 +15,6 @@ import { Checkbox } from 'react-native-paper';
 
 const { CalendarModule } = NativeModules;
 
-
 const FindRecipes: React.FC = ({navigation}:any) => {
   const [searchQuery, setSearchQuery] = React.useState('chicken');
   const [recipesArray, setRecipesArray] = React.useState([{"recipe": { "label": "a"}}]);

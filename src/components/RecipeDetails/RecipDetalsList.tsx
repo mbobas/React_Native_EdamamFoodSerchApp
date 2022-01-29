@@ -6,10 +6,10 @@ import { DataTable } from 'react-native-paper';
 
 interface RecipesDetailsListProps {
   title: string;
-  array: [];
+  array: string[];
 }
 
-const RecipesDetailsList = ({title, array}: RecipesDetailsListProps) => {
+const RecipesDetailsList = ({title, array }: RecipesDetailsListProps) => {
 
   const renderItem = ({ item }:any) => (
     <View>
